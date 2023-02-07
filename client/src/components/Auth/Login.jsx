@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./auth.css";
 
-const Login = () => {
+const Login = ({BASE_URL}) => {
   const navigate = useNavigate();
   const Login = async (e) => {
     e.preventDefault();
@@ -13,7 +13,7 @@ const Login = () => {
       password: e.target.password.value,
     };
     try {
-      await axios.post("/api/auth/login", loginData);
+      await axios.post(`${BASE_URL}/api/auth/login`, loginData);
       toast.success("Login succesfully");
       navigate("/");
     } catch (error) {

@@ -3,6 +3,8 @@ import bcrypthjs from "bcryptjs";
 import jwtToken from "jsonwebtoken";
 import createError from "../utils/createError.js";
 
+
+
 export const register = async (req, res,next) => {
   /*collect all info from fronted */
   const { name, email, password } = req.body;

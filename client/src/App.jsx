@@ -8,9 +8,9 @@ import PrivateRoute from "./components/PrivateRoute"
 import Edit from "./pages/Edit";
 import Register from "./pages/Register"
 
+const BASE_URL = "https://hoisting-production.up.railway.app/"
 
 function App() {
-  
   return (
     <>
       <Toaster
@@ -22,13 +22,13 @@ function App() {
         }}
       />
       <Routes>
-        <Route element={<PrivateRoute />}>
-          <Route path='/' element={<Home />} />
-          <Route path='/edit' element={<EditProfile />} />
+        <Route element={<PrivateRoute/>}>
+          <Route path='/' element={<Home BASE_URL={BASE_URL} />} />
+          <Route path='/edit' element={<EditProfile BASE_URL={BASE_URL} />} />
         </Route>
-        <Route path='/auth' element={<Auth/>} />
-        <Route path="/edittask" element={<Edit/>}/>
-        <Route path="/re" element={<Register/>}/>
+        <Route path='/auth' element={<Auth BASE_URL={BASE_URL}/>} />
+        <Route path="/edittask" element={<Edit BASE_URL={BASE_URL}/>}/>
+        <Route path="/re" element={<Register BASE_URL={BASE_URL}/>}/>
       </Routes>
     </>
   );

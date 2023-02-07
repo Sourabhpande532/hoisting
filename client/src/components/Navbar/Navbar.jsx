@@ -5,12 +5,12 @@ import { FaUserAlt } from "react-icons/fa";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({BASE_URL}) => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const getUserInfo = async () => {
     try {
-      const { data } = await axios.get("/api/users/me");
+      const { data } = await axios.get(`${BASE_URL}/api/users/me`);
       setUser(data);
       // console.log(data);
     } catch (error) {
@@ -20,7 +20,7 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.get("/api/auth/logout");
+      await axios.get(`${BASE_URL}/api/auth/logout`);
       setUser(null);
       toast.success("Logout Successfully");
       navigate("/auth");

@@ -5,7 +5,7 @@ import axios from 'axios';
 import toast from "react-hot-toast";
 import classes from "./Profile.module.scss";
 
-const ProfileForm = () => {
+const ProfileForm = ({BASE_URL}) => {
 const [user, setUser] = useState({
     name: '',
     email: ''
@@ -17,7 +17,7 @@ useEffect(()=>{
     (
       async () =>{
         try {
-        const {data} = await axios.get("/api/users/me");
+        const {data} = await axios.get(`${BASE_URL}/api/users/me`);
         console.log(data)
         setUser(data);
         } catch (error) {
@@ -43,7 +43,7 @@ const updateUserInfo = (e)=>{
   const upadateProfile = async(e)=>{
   e.preventDefault();
   try {
-   const res = await axios.put("/api/users/me/u", user);
+   const res = await axios.put(`${BASE_URL}/api/users/me/u`, user);
    setUser(res.data);
    console.log(res);
    toast.success("user successfully upadated"); 

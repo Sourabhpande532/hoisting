@@ -5,7 +5,7 @@ import axios from "axios";
 
 
 
-const Edit = () => {
+const Edit = ({BASE_URL}) => {
   // const navigate = useNavigate();
   const [titleHead, setTitle] = useState({
     title: '',
@@ -17,7 +17,7 @@ const Edit = () => {
   (
     async ()=>{
       try {
-        const {data} = await axios.get("/api/task/mytask");
+        const {data} = await axios.get(`${BASE_URL}/api/task/mytask`);
         setTitle(data);
         console.log(data)
         }catch (error) {

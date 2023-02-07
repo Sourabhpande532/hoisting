@@ -5,14 +5,14 @@ import classes from "./TaskItem.module.scss";
 import moment from 'moment';
 import { Link } from "react-router-dom";
 
-const TaskItem = ({ task, deleteTask }) => {
+const TaskItem = ({ task, deleteTask, BASE_URL }) => {
   const [iscompleted, setIsCompleted] = useState(task.completed);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleCheckboxClick = async() => {
   try {
   setIsLoading(true);
-  await axios.put(`/api/task/${task._id}`,{
+  await axios.put(`${BASE_URL}/api/task/${task._id}`,{
     completed: !iscompleted,
   })
   setIsCompleted(!iscompleted);

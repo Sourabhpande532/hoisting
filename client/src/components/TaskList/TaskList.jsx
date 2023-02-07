@@ -4,7 +4,7 @@ import TaskItem from "./TaskItem";
 import toast from "react-hot-toast";
 import axios from "axios";
 
-const TaskList = () => {
+const TaskList = ({BASE_URL}) => {
   const [taskList, setTaskList] = useState([]);
   const [isAddingNew, setisAddingNew] = useState(false);
   /*Whenever we are adding new data we'll make a true,when we'll close the data we'll make false above one e.g */
@@ -12,7 +12,7 @@ const TaskList = () => {
 
   const getTasks = async () => {
     try {
-      const { data } = await axios.get('/api/task/mytask');
+      const { data } = await axios.get(`${BASE_URL}/api/task/mytask`);
       setTaskList(
         data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
       );
@@ -44,7 +44,7 @@ const TaskList = () => {
       return;
     }
     try {
-    const { data } = await axios.post("/api/task", {
+    const { data } = await axios.post(`${BASE_URL}/api/task`, {
       title: newTask,
     })
     toast.success("New task Created")
@@ -62,7 +62,7 @@ const TaskList = () => {
   /* This is form TaskItem go taskItem route and see Id */
   const deleteTask = async (id) => {
     try {
-      await axios.delete(`/api/task/${id}`);
+      await axios.delete(`${BASE_URL}/api/task/${id}`);
       toast.success("Task successfully deleted");
       /*after successfully delted task we need remove from our taskList into our states so for that we need filter which says accept delete all thing properly run go @w3school and explore filter */
       setTaskList(taskList.filter((task) => task._id !== id));

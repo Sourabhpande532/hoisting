@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import axios from "axios"
 import {Link, useNavigate} from "react-router-dom"
 
-const Register = () => {
+const Register = ({BASE_URL}) => {
   const navigate = useNavigate();
 
   const register = async(e)=>{
@@ -15,7 +15,7 @@ const Register = () => {
       password: e.target.password.value,
     }
   try {
-  await axios.post('/api/auth/register', fetchUserInfo);
+  await axios.post(`${BASE_URL}/api/auth/register`, fetchUserInfo);
   toast.success("Successfully register")
   navigate("/auth")
   }catch (error) {

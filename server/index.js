@@ -1,9 +1,9 @@
 import "dotenv/config"
 import express  from "express";
-import mongoose from "mongoose";
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
+import connectToDb from "./config/db.js";
 import allRoutes from "./routes/main.js"
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -30,19 +30,8 @@ app.use((err, _req, res, next) => {
 });
 
 
-
-const connectDB = async () => {
-    try {
-      await mongoose.connect(process.env.DB_LOCALHOST_CONN);
-      console.log('MongoDB Connected');
-    } catch (err) {
-      console.log(err);
-      process.exit(1);
-    }
-  };
-
+connectToDb();
 
 app.listen(PORT, () => {
-    connectDB();
     console.log(`Server is running on port http://localhost:${PORT}`);
 });
