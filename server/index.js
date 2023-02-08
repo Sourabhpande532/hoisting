@@ -10,7 +10,12 @@ const PORT = process.env.PORT || 8000;
 
 /* Middleware */
 
-app.use(cors()); //helps us to share our info between clients
+app.use(cors({
+  credentials : true,
+  origin : "https://hoisting-production.up.railway.app/"
+}));
+
+//helps us to share our info between clients
 app.use(morgan('tiny')); //whenever we hit any kind of route it will actually login our terminal
 app.use(cookieParser()); 
 app.use(express.json());//it will enable our abality to work with json

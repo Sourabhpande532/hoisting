@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export default () => {
+export default ({BASE_URL}) => {
   const [auth, setAuth] = useState();
+
 
   const varifyAuth = async () => {
     try {
-      const res = await axios.get('/api/auth/is_logged_in');
+      const res = await axios.get(`${BASE_URL}/api/auth/is_logged_in`);
       return res.data;
     } catch (error) {
       console.log(error);
