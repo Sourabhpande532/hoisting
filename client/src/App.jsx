@@ -21,7 +21,7 @@ function App() {
         }}
       />
       <Routes>
-        <Route element={<PrivateRoute BASE_URL={BASE_URL}/>}>
+        <Route element={<PrivateRoute/>}>
           <Route path='/' element={<Home BASE_URL={BASE_URL} />} />
           <Route path='/edit' element={<EditProfile BASE_URL={BASE_URL} />} />
         </Route>

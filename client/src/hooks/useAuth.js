@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export default ({BASE_URL}) => {
+export default () => {
   const [auth, setAuth] = useState();
+  const BASE_URL = "https://hoisting-production.up.railway.app/"
 
 
   const varifyAuth = async () => {
