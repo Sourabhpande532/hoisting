@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 export default () => {
   const [auth, setAuth] = useState();
-  const BASE_URL = "https://hoisting-production.up.railway.app/"
+  const BASE_URL = "https://hoisting-production.up.railway.app"
 
 
   const varifyAuth = async () => {

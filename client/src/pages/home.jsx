@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar/Navbar'
 import TaskList from '../components/TaskList/TaskList'
 
 const home = () => {
-  const BASE_URL = "https://hoisting-production.up.railway.app/"
+  const BASE_URL = "https://hoisting-production.up.railway.app"
   return (
     <Layout>
      <Navbar BASE_URL={BASE_URL}/>

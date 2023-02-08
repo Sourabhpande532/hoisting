@@ -9,7 +9,7 @@ import Edit from "./pages/Edit";
 import Register from "./pages/Register"
 
 function App() {
-  const BASE_URL = "https://hoisting-production.up.railway.app/"
+  const BASE_URL = "https://hoisting-production.up.railway.app"
   return (
     <>
       <Toaster

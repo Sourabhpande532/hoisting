@@ -6,7 +6,7 @@ import useAuth from "../hooks/useAuth";
 import { useNavigate } from 'react-router-dom';
 
 const Auth = () => {
-  const BASE_URL = "https://hoisting-production.up.railway.app/"
+  const BASE_URL = "https://hoisting-production.up.railway.app"
 /*The proccess is once you login that no one can be able to visit any route like login,register,edit ..any */  
 const navigate = useNavigate();
 const {auth} = useAuth();
