@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 8000;
 /* Middleware */
 
 app.use(cors({
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials : true,
   Origin : "https://hoisting-eight.vercel.app"
 }));
