@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 8000;
 
 app.use(cors({
   credentials : true,
-  origin : "https://hoisting-production.up.railway.app"
+  origin : "https://hoisting-eight.vercel.app"
 }));
 
 //helps us to share our info between clients
