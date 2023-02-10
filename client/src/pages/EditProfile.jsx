@@ -1,13 +1,12 @@
-import React from 'react'
-import ProfileForm from '../components/Profile/ProfileForm'
+import React from 'react';
+import ProfileForm from '../components/Profile/ProfileForm';
 
-const EditProfile = () => {
-  const BASE_URL = "https://hoisting-production.up.railway.app"
+function EditProfile() {
   return (
     <div>
-      <ProfileForm BASE_URL={BASE_URL}/>
+      <ProfileForm />
     </div>
-  )
+  );
 }
 
-export default EditProfile
+export default EditProfile;

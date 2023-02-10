@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { toast } from "react-hot-toast";
-import classes from "./Navbar.module.scss";
-import { FaUserAlt } from "react-icons/fa";
-import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { toast } from 'react-hot-toast';
+import { FaUserAlt } from 'react-icons/fa';
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
+import classes from './Navbar.module.scss';
 
-const Navbar = ({BASE_URL}) => {
+function Navbar() {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
+
   const getUserInfo = async () => {
     try {
-      const { data } = await axios.get(`${BASE_URL}/api/users/me`);
+      const { data } = await axios.get('/api/users/me');
       setUser(data);
-      // console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -20,13 +20,12 @@ const Navbar = ({BASE_URL}) => {
 
   const handleLogout = async () => {
     try {
-      await axios.get(`${BASE_URL}/api/auth/logout`);
+      await axios.get('/api/auth/logout');
       setUser(null);
-      toast.success("Logout Successfully");
-      navigate("/auth");
+      toast.success('Logout Successfully');
+      navigate('/auth');
     } catch (error) {
       console.log(error);
-      //  toast.error("Logout Fail")
     }
   };
 
@@ -43,18 +42,18 @@ const Navbar = ({BASE_URL}) => {
         <div>
           <h1 className={classes.name}>{user.name}</h1>
           <p className={classes.email}>{user.email}</p>
-          <Link to='/edit' className={classes.editBtn}>
+          <Link to="/edit" className={classes.editBtn}>
             Edit
           </Link>
         </div>
       </div>
       <nav>
-        <button type='button' className={classes.logout} onClick={handleLogout}>
+        <button type="button" className={classes.logout} onClick={handleLogout}>
           logout
         </button>
       </nav>
     </header>
   );
-};
+}
 
 export default Navbar;
