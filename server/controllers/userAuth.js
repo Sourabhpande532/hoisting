@@ -1,23 +1,22 @@
-import User from "../models/user.js";
-import bcrypthjs from "bcryptjs";
-import jwtToken from "jsonwebtoken";
-import createError from "../utils/createError.js";
+import User from '../models/user.js';
+import bcrypthjs from 'bcryptjs';
+import jwtToken from 'jsonwebtoken';
+import createError from '../utils/createError.js';
 
-
-
-export const register = async (req, res,next) => {
+export const register = async (req, res, next) => {
   /*collect all info from fronted */
   const { name, email, password } = req.body;
 
   /* Validate the data, if exit*/
   if (!name || !email || !password) {
-    return next(createError({ status: 400, message: "All fields are Required" }));
-
+    return next(
+      createError({ status: 400, message: 'All fields are Required' })
+    );
   }
   /*cheack user Already exit or not */
   const exitOrNot = await User.findOne({ email });
   if (exitOrNot) {
-    res.status(401).send("user already exits");
+    res.status(401).send('user already exits');
   }
 
   try {
@@ -37,12 +36,12 @@ export const register = async (req, res,next) => {
     newUser.password = undefined;
     return res.status(201).json({
       success: true,
-      message: "user successfully add",
+      message: 'user successfully add',
       newUser,
     });
   } catch (error) {
     // return res.json(`register server ${error}`);
-    return next(`register ${error}`)   
+    return next(`register ${error}`);
   }
 };
 
@@ -52,19 +51,23 @@ export const login = async (req, res, next) => {
   /*validate all info */
   if (!(email && password)) {
     // res.status(401).send("both field are required");
-    return next(createError({status:400, message:"Both field are requied"}))
+    return next(
+      createError({ status: 400, message: 'Both field are requied' })
+    );
   }
   try {
     /*cheack if already in DB or not */
-    const user = await User.findOne({ email }).select("name email password");
+    const user = await User.findOne({ email }).select('name email password');
     if (!user) {
-     return next(createError({status:404, message:"user not found"}))
+      return next(createError({ status: 404, message: 'user not found' }));
     }
     /* cheack password is correct or not */
     const isPasswordcorrect = await bcrypthjs.compare(password, user.password);
     if (!isPasswordcorrect) {
       // return res.json("Password is incorrect");
-      return next(createError({status:400, message: "Unauthorized login password"}))
+      return next(
+        createError({ status: 400, message: 'Unauthorized login password' })
+      );
     }
     /*If it is correct password in the case we will create a cookie for a user & will pass the cookes with responses
      */
@@ -78,8 +81,8 @@ export const login = async (req, res, next) => {
 
     /*create a token pass payload into token then send to cookies */
 
-    const token = jwtToken.sign(payload, process.env.JWT_SECRETE, {
-      expiresIn: "1d",
+    const token = jwtToken.sign(payload, process.env.JWT_SECRET, {
+      expiresIn: '1d',
     });
     // user.password = undefined;
 
@@ -88,40 +91,38 @@ export const login = async (req, res, next) => {
     };
 
     return res
-      .cookie("token", token, options, {
+      .cookie('token', token, options, {
         httpOnly: true,
         /* why it is http only true because no one can access this cookie from fronted accept server */
       })
       .status(200)
       .json({
         success: true,
-        message: "successfully login",
+        message: 'successfully login',
         user,
         token,
       });
 
-      /* Now using this cookie we can varify any kind of cookies in middleware/utlis weather it is logged in user or not*/
-
+    /* Now using this cookie we can varify any kind of cookies in middleware/utlis weather it is logged in user or not*/
   } catch (error) {
-    return next(`login ${error}`)
+    return next(`login ${error}`);
   }
 };
 
-export const logout = async(req,res)=>{
-res.clearCookie("token");
-return res.status(200).json({message:"Successfully logout"});
-}
+export const logout = async (req, res) => {
+  res.clearCookie('token');
+  return res.status(200).json({ message: 'Successfully logout' });
+};
 
-export const isLoggedIn = async(req,res)=>{
-  const {token} = req.cookies
-  if(!token){
+export const isLoggedIn = async (req, res) => {
+  const { token } = req.cookies;
+  if (!token) {
     return res.json(false);
   }
-  return jwtToken.verify(token, process.env.JWT_SECRETE, (err)=>{
-    if(err){
-      return res.json(false)
+  return jwtToken.verify(token, process.env.JWT_SECRET, (err) => {
+    if (err) {
+      return res.json(false);
     }
-    return res.json(true)
-  })
-}
-
+    return res.json(true);
+  });
+};

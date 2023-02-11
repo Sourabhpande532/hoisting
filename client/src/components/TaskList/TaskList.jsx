@@ -49,7 +49,7 @@ function TaskList() {
       return;
     }
     try {
-      const { data } = await axios.post(`${BASE_URL}/api/task`, {
+      const { data } = await axios.post('/api/task', {
         title: newTask,
       });
       toast.success('New task Created');

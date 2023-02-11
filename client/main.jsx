@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import axios from 'axios';
 
 import App from './src/App';
-import './src/styles/global.scss';
+import './src/style/global.scss';
 
 // Axios
 axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
