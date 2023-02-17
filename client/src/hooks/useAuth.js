@@ -1,23 +1,31 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
+import jwt from 'jwt-decode';
 
-export default () => {
-  const [auth, setAuth] = useState();
+const useAuth = () => {
+  const [auth, setAuth] = useState(false);
 
-  const varifyAuth = async () => {
-    try {
-      const res = await axios.get('/api/auth/is_logged_in');
-      return res.data;
-    } catch (error) {
-      return false;
-    }
-  };
   useEffect(() => {
-    /** we use iffy here To instantly Invoke */
-    (async () => {
-      const data = await varifyAuth();
+    const verifyAuth = () => {
+      const userToken = localStorage.getItem('token');
+      const decodedToken = userToken && jwt(userToken, { complete: true });
+      const dateNow = new Date();
+
+      if (decodedToken && decodedToken.exp * 1000 > dateNow.getTime()) {
+        return true;
+      }
+
+      return false;
+    };
+
+    const checkForToken = () => {
+      const data = verifyAuth();
       setAuth(data);
-    })();
+    };
+
+    checkForToken();
   });
+
   return { auth };
 };
+
+export default useAuth;

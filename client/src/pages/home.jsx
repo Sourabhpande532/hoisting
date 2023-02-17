@@ -4,11 +4,13 @@ import Layout from '../components/Layout/Layout';
 import Navbar from '../components/Navbar/Navbar';
 import TaskList from '../components/TaskList/TaskList';
 
-const home = () => (
-  <Layout>
-    <Navbar />
-    <TaskList />
-  </Layout>
-);
+function Home() {
+  return (
+    <Layout>
+      <Navbar />
+      <TaskList />
+    </Layout>
+  );
+}
 
-export default home;
+export default Home;

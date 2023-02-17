@@ -16,11 +16,15 @@ function Login() {
     };
 
     try {
-      await axios.post('/api/auth/login', loginData);
-      toast.success('Login succesfully');
-      navigate('/');
+      await axios.post('/api/auth/login', loginData).then((res) => {
+        if (res.data.success) {
+          toast.success(res.data.message);
+          localStorage.setItem('token', res.data.token);
+          localStorage.setItem('user', JSON.stringify(res.data.user));
+          navigate('/');
+        }
+      });
     } catch (error) {
-      console.log(error);
       toast.error('login failed');
     }
   };
