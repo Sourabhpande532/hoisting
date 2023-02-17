@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 
-import Home from './pages/home';
+import Home from './pages/Home';
 import EditProfile from './pages/EditProfile';
 import Auth from './pages/Auth';
 import PrivateRoute from './components/PrivateRoute';

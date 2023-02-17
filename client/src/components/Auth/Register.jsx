@@ -16,9 +16,12 @@ function Register() {
       password: e.target.password.value,
     };
     try {
-      await axios.post('/api/auth/register', fetchUserInfo);
-      toast.success('Successfully register');
-      navigate('/auth');
+      await axios.post('/api/auth/register', fetchUserInfo).then((res) => {
+        if (res.data.success) {
+          toast.success(res.data.message);
+          navigate('/auth');
+        }
+      });
     } catch (error) {
       toast.error('Registration Failed');
     }
